@@ -10,11 +10,15 @@ from utils import hwc_to_chw, read_img
 def augment(imgs=[], size=256, edge_decay=0., only_h_flip=False):
 	H, W, _ = imgs[0].shape
 	Hc, Wc = [size, size]
-
+	if (H<Hc)or(W<Wc):
+		imgs[0] = cv2.resize(imgs[0], (Hc, Wc))
+		imgs[1] = cv2.resize(imgs[1], (Hc, Wc))
+		H, W = Hc, Wc
 	# simple re-weight for the edge
 	if random.random() < Hc / H * edge_decay:
 		Hs = 0 if random.randint(0, 1) == 0 else H - Hc
 	else:
+		# print(H, Hc)
 		Hs = random.randint(0, H-Hc)
 
 	if random.random() < Wc / W * edge_decay:
