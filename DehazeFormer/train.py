@@ -124,6 +124,7 @@ if __name__ == '__main__':
 
         best_psnr = 0
         for epoch in tqdm(range(setting['epochs'] + 1)):
+            print(f"epoch {epoch}:")
             loss = train(train_loader, network, criterion, optimizer, scaler)
 
             writer.add_scalar('train_loss', loss, epoch)
