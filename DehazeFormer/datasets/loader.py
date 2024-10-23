@@ -46,7 +46,10 @@ def augment(imgs=[], size=256, edge_decay=0., only_h_flip=False):
 def align(imgs=[], size=256):
 	H, W, _ = imgs[0].shape
 	Hc, Wc = [size, size]
-
+        if (H<Hc)or(W<Wc):
+		imgs[0] = cv2.resize(imgs[0], (Hc, Wc))
+		imgs[1] = cv2.resize(imgs[1], (Hc, Wc))
+		H, W = Hc, Wc
 	Hs = (H - Hc) // 2
 	Ws = (W - Wc) // 2
 	for i in range(len(imgs)):
