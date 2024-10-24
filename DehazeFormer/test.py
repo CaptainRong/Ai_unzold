@@ -85,10 +85,11 @@ def test(test_loader, network, result_dir):
 
 
 if __name__ == '__main__':
+    print(args.model.replace('-', '_'))
     network = eval(args.model.replace('-', '_'))()
     network.cuda()
     saved_model_dir = os.path.join(args.save_dir, args.exp, args.model + '.pth')
-
+    print(saved_model_dir)
     if os.path.exists(saved_model_dir):
         print('==> Start testing, current model name: ' + args.model)
         network.load_state_dict(single(saved_model_dir))

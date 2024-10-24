@@ -18,7 +18,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # 页面标题
-st.title("车辆重识别系统")
+st.title("去雾增强车辆重识别系统")
 
 # 创建左右布局
 col1, col2 = st.columns(2)
