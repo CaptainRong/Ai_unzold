@@ -1,0 +1,707 @@
+[10/23 08:13:45 fastreid.modeling.backbones.resnet]: Loading pretrained model from /root/.cache/torch/checkpoints/resnet50_ibn_a-d9d0bb7b.pth
+[10/23 08:13:45 fastreid.modeling.backbones.resnet]: Some model parameters or buffers are not found in the checkpoint:
+  NL_2.0.g.{weight, bias}
+  NL_2.0.W.0.{weight, bias}
+  NL_2.0.W.1.{weight, bias, running_mean, running_var}
+  NL_2.0.theta.{weight, bias}
+  NL_2.0.phi.{weight, bias}
+  NL_2.1.g.{weight, bias}
+  NL_2.1.W.0.{weight, bias}
+  NL_2.1.W.1.{weight, bias, running_mean, running_var}
+  NL_2.1.theta.{weight, bias}
+  NL_2.1.phi.{weight, bias}
+  NL_3.0.g.{weight, bias}
+  NL_3.0.W.0.{weight, bias}
+  NL_3.0.W.1.{weight, bias, running_mean, running_var}
+  NL_3.0.theta.{weight, bias}
+  NL_3.0.phi.{weight, bias}
+  NL_3.1.g.{weight, bias}
+  NL_3.1.W.0.{weight, bias}
+  NL_3.1.W.1.{weight, bias, running_mean, running_var}
+  NL_3.1.theta.{weight, bias}
+  NL_3.1.phi.{weight, bias}
+  NL_3.2.g.{weight, bias}
+  NL_3.2.W.0.{weight, bias}
+  NL_3.2.W.1.{weight, bias, running_mean, running_var}
+  NL_3.2.theta.{weight, bias}
+  NL_3.2.phi.{weight, bias}
+[10/23 08:13:45 fastreid.modeling.backbones.resnet]: The checkpoint state_dict contains keys that are not used by the model:
+  fc.{weight, bias}
+[10/23 08:13:45 fastreid.engine.defaults]: Model:
+Baseline(
+  (backbone): ResNet(
+    (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (bn1): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=True)
+    (layer1): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+        (downsample): Sequential(
+          (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+    )
+    (layer2): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (3): Bottleneck(
+        (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+    )
+    (layer3): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+        (downsample): Sequential(
+          (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (3): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (4): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (5): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): IBN(
+          (IN): InstanceNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+          (BN): BatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+    )
+    (layer4): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+        (downsample): Sequential(
+          (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (se): Identity()
+      )
+    )
+    (NL_1): ModuleList()
+    (NL_2): ModuleList(
+      (0-1): 2 x Non_local(
+        (g): Conv2d(512, 1, kernel_size=(1, 1), stride=(1, 1))
+        (W): Sequential(
+          (0): Conv2d(1, 512, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (theta): Conv2d(512, 1, kernel_size=(1, 1), stride=(1, 1))
+        (phi): Conv2d(512, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (NL_3): ModuleList(
+      (0-2): 3 x Non_local(
+        (g): Conv2d(1024, 1, kernel_size=(1, 1), stride=(1, 1))
+        (W): Sequential(
+          (0): Conv2d(1, 1024, kernel_size=(1, 1), stride=(1, 1))
+          (1): BatchNorm(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (theta): Conv2d(1024, 1, kernel_size=(1, 1), stride=(1, 1))
+        (phi): Conv2d(1024, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+    (NL_4): ModuleList()
+  )
+  (heads): EmbeddingHead(
+    (pool_layer): GeneralizedMeanPoolingP(Parameter containing:
+    tensor([3.], device='cuda:0', requires_grad=True), output_size=(1, 1))
+    (bottleneck): Sequential(
+      (0): BatchNorm(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (cls_layer): CircleSoftmax(num_classes=576, scale=64, margin=0.35)
+  )
+)
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 08:13:46 fastreid.utils.checkpoint]: No checkpoint found. Training model from scratch
+[10/23 08:13:46 fastreid.engine.train_loop]: Starting training from epoch 0
+[10/23 08:13:46 fastreid.engine.hooks]: Freeze layer group "backbone" training for 3000 iterations
+[10/23 08:14:45 fastreid.utils.events]:  eta: 2:40:49  epoch/iter: 0/199  total_loss: 68.46  loss_cls: 49.98  loss_triplet: 18.54  time: 0.2743  data_time: 0.0014  lr: 1.60e-03  max_mem: 11888M
+[10/23 08:15:42 fastreid.utils.events]:  eta: 2:44:24  epoch/iter: 0/399  total_loss: 69.32  loss_cls: 49.96  loss_triplet: 19.33  time: 0.2811  data_time: 0.0006  lr: 2.20e-03  max_mem: 11888M
+[10/23 08:16:39 fastreid.utils.events]:  eta: 2:46:19  epoch/iter: 0/589  total_loss: 69.43  loss_cls: 49.92  loss_triplet: 19.36  time: 0.2865  data_time: 0.0012  lr: 2.77e-03  max_mem: 11888M
+[10/23 08:16:42 fastreid.utils.events]:  eta: 2:46:24  epoch/iter: 1/599  total_loss: 69.43  loss_cls: 49.92  loss_triplet: 19.37  time: 0.2867  data_time: 0.0012  lr: 2.80e-03  max_mem: 11888M
+[10/23 08:17:43 fastreid.utils.events]:  eta: 2:48:33  epoch/iter: 1/799  total_loss: 69.16  loss_cls: 49.97  loss_triplet: 19.27  time: 0.2906  data_time: 0.0015  lr: 3.40e-03  max_mem: 11888M
+[10/23 08:18:43 fastreid.utils.events]:  eta: 2:50:05  epoch/iter: 1/999  total_loss: 69.06  loss_cls: 49.86  loss_triplet: 19.11  time: 0.2933  data_time: 0.0008  lr: 4.00e-03  max_mem: 11888M
+[10/23 08:19:38 fastreid.utils.events]:  eta: 2:51:57  epoch/iter: 1/1179  total_loss: 69.26  loss_cls: 49.89  loss_triplet: 19.27  time: 0.2950  data_time: 0.0007  lr: 4.54e-03  max_mem: 11888M
+[10/23 08:19:44 fastreid.utils.events]:  eta: 2:52:01  epoch/iter: 2/1199  total_loss: 69.28  loss_cls: 49.89  loss_triplet: 19.48  time: 0.2951  data_time: 0.0010  lr: 4.60e-03  max_mem: 11888M
+[10/23 08:20:45 fastreid.utils.events]:  eta: 2:52:13  epoch/iter: 2/1399  total_loss: 69.18  loss_cls: 49.97  loss_triplet: 19.12  time: 0.2964  data_time: 0.0013  lr: 5.20e-03  max_mem: 11888M
+[10/23 08:21:46 fastreid.utils.events]:  eta: 2:51:27  epoch/iter: 2/1599  total_loss: 69.03  loss_cls: 49.86  loss_triplet: 19.1  time: 0.2974  data_time: 0.0004  lr: 5.80e-03  max_mem: 11888M
+[10/23 08:22:38 fastreid.utils.events]:  eta: 2:50:38  epoch/iter: 2/1769  total_loss: 69.79  loss_cls: 49.96  loss_triplet: 19.57  time: 0.2981  data_time: 0.0006  lr: 6.31e-03  max_mem: 11888M
+[10/23 08:22:47 fastreid.utils.events]:  eta: 2:50:30  epoch/iter: 3/1799  total_loss: 69.73  loss_cls: 49.96  loss_triplet: 19.57  time: 0.2982  data_time: 0.0006  lr: 6.40e-03  max_mem: 11888M
+[10/23 08:23:48 fastreid.utils.events]:  eta: 2:49:30  epoch/iter: 3/1999  total_loss: 69.39  loss_cls: 49.9  loss_triplet: 19.37  time: 0.2988  data_time: 0.0003  lr: 7.00e-03  max_mem: 11888M
+[10/23 08:24:48 fastreid.utils.events]:  eta: 2:48:27  epoch/iter: 3/2199  total_loss: 69.03  loss_cls: 49.95  loss_triplet: 19.04  time: 0.2992  data_time: 0.0008  lr: 7.60e-03  max_mem: 11888M
+[10/23 08:25:37 fastreid.utils.events]:  eta: 2:47:35  epoch/iter: 3/2359  total_loss: 68.46  loss_cls: 49.92  loss_triplet: 18.78  time: 0.2994  data_time: 0.0008  lr: 8.08e-03  max_mem: 11888M
+[10/23 08:25:49 fastreid.utils.events]:  eta: 2:47:21  epoch/iter: 4/2399  total_loss: 68.48  loss_cls: 49.93  loss_triplet: 18.82  time: 0.2994  data_time: 0.0010  lr: 8.20e-03  max_mem: 11888M
+[10/23 08:26:49 fastreid.utils.events]:  eta: 2:46:12  epoch/iter: 4/2599  total_loss: 69.63  loss_cls: 49.99  loss_triplet: 19.54  time: 0.2996  data_time: 0.0003  lr: 8.80e-03  max_mem: 11888M
+[10/23 08:27:50 fastreid.utils.events]:  eta: 2:45:07  epoch/iter: 4/2799  total_loss: 68.93  loss_cls: 49.93  loss_triplet: 19.21  time: 0.3000  data_time: 0.0005  lr: 9.40e-03  max_mem: 11888M
+[10/23 08:28:36 fastreid.utils.events]:  eta: 2:44:19  epoch/iter: 4/2949  total_loss: 69.58  loss_cls: 49.91  loss_triplet: 19.49  time: 0.3001  data_time: 0.0005  lr: 9.85e-03  max_mem: 11888M
+[10/23 08:28:51 fastreid.utils.events]:  eta: 2:44:03  epoch/iter: 5/2999  total_loss: 68.88  loss_cls: 49.92  loss_triplet: 19.14  time: 0.3002  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:28:51 fastreid.engine.hooks]: Open layer group "backbone" training
+[10/23 08:29:54 fastreid.utils.events]:  eta: 2:43:23  epoch/iter: 5/3199  total_loss: 69.96  loss_cls: 49.97  loss_triplet: 19.96  time: 0.3013  data_time: 0.0007  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:30:58 fastreid.utils.events]:  eta: 2:43:11  epoch/iter: 5/3399  total_loss: 69.08  loss_cls: 49.93  loss_triplet: 19.1  time: 0.3022  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:31:42 fastreid.utils.events]:  eta: 2:46:28  epoch/iter: 5/3539  total_loss: 69.26  loss_cls: 50.02  loss_triplet: 19.34  time: 0.3028  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:32:01 fastreid.utils.events]:  eta: 2:46:48  epoch/iter: 6/3599  total_loss: 69.53  loss_cls: 49.98  loss_triplet: 19.6  time: 0.3030  data_time: 0.0002  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:33:05 fastreid.utils.events]:  eta: 2:46:55  epoch/iter: 6/3799  total_loss: 69.27  loss_cls: 49.94  loss_triplet: 19.41  time: 0.3038  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:34:08 fastreid.utils.events]:  eta: 2:46:05  epoch/iter: 6/3999  total_loss: 69.86  loss_cls: 49.92  loss_triplet: 20.02  time: 0.3045  data_time: 0.0007  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:34:49 fastreid.utils.events]:  eta: 2:45:24  epoch/iter: 6/4129  total_loss: 69.49  loss_cls: 49.93  loss_triplet: 19.54  time: 0.3049  data_time: 0.0002  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:35:12 fastreid.utils.events]:  eta: 2:45:02  epoch/iter: 7/4199  total_loss: 69.2  loss_cls: 49.94  loss_triplet: 19.25  time: 0.3051  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:36:15 fastreid.utils.events]:  eta: 2:43:59  epoch/iter: 7/4399  total_loss: 69.62  loss_cls: 49.91  loss_triplet: 19.56  time: 0.3056  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:37:19 fastreid.utils.events]:  eta: 2:42:56  epoch/iter: 7/4599  total_loss: 69.22  loss_cls: 49.99  loss_triplet: 19.27  time: 0.3062  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:37:57 fastreid.utils.events]:  eta: 2:42:18  epoch/iter: 7/4719  total_loss: 69.73  loss_cls: 49.95  loss_triplet: 19.67  time: 0.3064  data_time: 0.0006  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:38:22 fastreid.utils.events]:  eta: 2:41:53  epoch/iter: 8/4799  total_loss: 69.58  loss_cls: 49.91  loss_triplet: 19.54  time: 0.3066  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:39:26 fastreid.utils.events]:  eta: 2:40:51  epoch/iter: 8/4999  total_loss: 69.68  loss_cls: 49.93  loss_triplet: 19.75  time: 0.3071  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:40:29 fastreid.utils.events]:  eta: 2:39:49  epoch/iter: 8/5199  total_loss: 69.55  loss_cls: 49.99  loss_triplet: 19.51  time: 0.3075  data_time: 0.0013  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:41:04 fastreid.utils.events]:  eta: 2:39:15  epoch/iter: 8/5309  total_loss: 69.25  loss_cls: 49.98  loss_triplet: 19.28  time: 0.3077  data_time: 0.0010  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:41:33 fastreid.utils.events]:  eta: 2:38:47  epoch/iter: 9/5399  total_loss: 69.18  loss_cls: 49.96  loss_triplet: 19.15  time: 0.3079  data_time: 0.0008  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:42:36 fastreid.utils.events]:  eta: 2:37:41  epoch/iter: 9/5599  total_loss: 69.15  loss_cls: 49.93  loss_triplet: 19.16  time: 0.3081  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:43:39 fastreid.utils.events]:  eta: 2:36:34  epoch/iter: 9/5799  total_loss: 69.66  loss_cls: 49.94  loss_triplet: 19.47  time: 0.3084  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:44:11 fastreid.engine.defaults]: Prepare testing set
+[10/23 08:44:11 fastreid.data.datasets.bases]: => Loaded VeRi in csv format: 
+| subset   | # ids   | # images   | # cameras   |
+|:---------|:--------|:-----------|:------------|
+| query    | 200     | 1678       | 19          |
+| gallery  | 200     | 11579      | 19          |
+[10/23 08:44:11 fastreid.evaluation.evaluator]: Start inference on 13257 images
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 08:44:22 fastreid.evaluation.evaluator]: Inference done 11/52. 0.3981 s / batch. ETA=0:00:16
+[10/23 08:44:41 fastreid.evaluation.evaluator]: Total inference time: 0:00:22.236424 (0.473115 s / batch per device, on 1 devices)
+[10/23 08:44:41 fastreid.evaluation.evaluator]: Total inference pure compute time: 0:00:20 (0.441167 s / batch per device, on 1 devices)
+[10/23 08:44:42 fastreid.engine.defaults]: Evaluation results for VeRi in csv format:
+[10/23 08:44:42 fastreid.evaluation.testing]: Evaluation results in csv format: 
+| Dataset   | Rank-1   | Rank-5   | Rank-10   | mAP   | mINP   | metric   |
+|:----------|:---------|:---------|:----------|:------|:-------|:---------|
+| VeRi      | 20.50    | 33.43    | 41.66     | 4.94  | 0.66   | 12.72    |
+[10/23 08:44:42 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_best.pth
+[10/23 08:44:43 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_0009.pth
+[10/23 08:44:43 fastreid.utils.events]:  eta: 2:36:01  epoch/iter: 9/5899  total_loss: 69.67  loss_cls: 49.92  loss_triplet: 19.65  time: 0.3085  data_time: 0.0009  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:45:14 fastreid.utils.events]:  eta: 2:35:23  epoch/iter: 10/5999  total_loss: 69.72  loss_cls: 49.88  loss_triplet: 19.8  time: 0.3086  data_time: 0.0013  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:46:17 fastreid.utils.events]:  eta: 2:34:09  epoch/iter: 10/6199  total_loss: 69.67  loss_cls: 49.98  loss_triplet: 19.74  time: 0.3088  data_time: 0.0002  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:47:20 fastreid.utils.events]:  eta: 2:33:03  epoch/iter: 10/6399  total_loss: 69.77  loss_cls: 49.99  loss_triplet: 19.74  time: 0.3091  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:47:49 fastreid.utils.events]:  eta: 2:32:37  epoch/iter: 10/6489  total_loss: 69.4  loss_cls: 49.97  loss_triplet: 19.38  time: 0.3092  data_time: 0.0008  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:48:24 fastreid.utils.events]:  eta: 2:32:06  epoch/iter: 11/6599  total_loss: 69.1  loss_cls: 49.94  loss_triplet: 19.12  time: 0.3093  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:49:27 fastreid.utils.events]:  eta: 2:31:07  epoch/iter: 11/6799  total_loss: 69.63  loss_cls: 49.97  loss_triplet: 19.72  time: 0.3096  data_time: 0.0006  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:50:31 fastreid.utils.events]:  eta: 2:30:09  epoch/iter: 11/6999  total_loss: 69.95  loss_cls: 49.92  loss_triplet: 20.01  time: 0.3098  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:50:56 fastreid.utils.events]:  eta: 2:29:45  epoch/iter: 11/7079  total_loss: 69.46  loss_cls: 49.93  loss_triplet: 19.63  time: 0.3099  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:51:34 fastreid.utils.events]:  eta: 2:29:07  epoch/iter: 12/7199  total_loss: 69.76  loss_cls: 49.93  loss_triplet: 19.68  time: 0.3100  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:52:38 fastreid.utils.events]:  eta: 2:28:05  epoch/iter: 12/7399  total_loss: 69.07  loss_cls: 49.93  loss_triplet: 19.09  time: 0.3102  data_time: 0.0006  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:53:41 fastreid.utils.events]:  eta: 2:27:01  epoch/iter: 12/7599  total_loss: 69.48  loss_cls: 49.93  loss_triplet: 19.7  time: 0.3104  data_time: 0.0010  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:54:03 fastreid.utils.events]:  eta: 2:26:38  epoch/iter: 12/7669  total_loss: 69.31  loss_cls: 49.93  loss_triplet: 19.38  time: 0.3105  data_time: 0.0009  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:54:45 fastreid.utils.events]:  eta: 2:25:58  epoch/iter: 13/7799  total_loss: 69.15  loss_cls: 49.92  loss_triplet: 19.24  time: 0.3106  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:55:48 fastreid.utils.events]:  eta: 2:24:56  epoch/iter: 13/7999  total_loss: 69.34  loss_cls: 49.96  loss_triplet: 19.2  time: 0.3107  data_time: 0.0007  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:56:52 fastreid.utils.events]:  eta: 2:23:53  epoch/iter: 13/8199  total_loss: 69.75  loss_cls: 49.93  loss_triplet: 19.79  time: 0.3109  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:57:11 fastreid.utils.events]:  eta: 2:23:34  epoch/iter: 13/8259  total_loss: 69.73  loss_cls: 49.88  loss_triplet: 19.77  time: 0.3110  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:57:55 fastreid.utils.events]:  eta: 2:22:49  epoch/iter: 14/8399  total_loss: 69.35  loss_cls: 49.87  loss_triplet: 19.61  time: 0.3111  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 08:58:59 fastreid.utils.events]:  eta: 2:21:44  epoch/iter: 14/8599  total_loss: 69.38  loss_cls: 49.92  loss_triplet: 19.6  time: 0.3112  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:00:02 fastreid.utils.events]:  eta: 2:20:37  epoch/iter: 14/8799  total_loss: 69.72  loss_cls: 49.91  loss_triplet: 19.76  time: 0.3113  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:00:18 fastreid.utils.events]:  eta: 2:20:21  epoch/iter: 14/8849  total_loss: 69.65  loss_cls: 49.92  loss_triplet: 19.54  time: 0.3113  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:01:05 fastreid.utils.events]:  eta: 2:19:31  epoch/iter: 15/8999  total_loss: 69.48  loss_cls: 49.94  loss_triplet: 19.6  time: 0.3114  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:02:09 fastreid.utils.events]:  eta: 2:18:27  epoch/iter: 15/9199  total_loss: 69.87  loss_cls: 49.92  loss_triplet: 19.87  time: 0.3116  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:03:12 fastreid.utils.events]:  eta: 2:17:24  epoch/iter: 15/9399  total_loss: 69.44  loss_cls: 49.88  loss_triplet: 19.42  time: 0.3117  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:03:25 fastreid.utils.events]:  eta: 2:17:12  epoch/iter: 15/9439  total_loss: 69.5  loss_cls: 49.87  loss_triplet: 19.56  time: 0.3117  data_time: 0.0002  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:04:16 fastreid.utils.events]:  eta: 2:16:25  epoch/iter: 16/9599  total_loss: 69.62  loss_cls: 49.95  loss_triplet: 19.66  time: 0.3118  data_time: 0.0006  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:05:19 fastreid.utils.events]:  eta: 2:15:24  epoch/iter: 16/9799  total_loss: 69.59  loss_cls: 49.88  loss_triplet: 19.72  time: 0.3119  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:06:23 fastreid.utils.events]:  eta: 2:14:22  epoch/iter: 16/9999  total_loss: 69.38  loss_cls: 49.94  loss_triplet: 19.29  time: 0.3120  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:06:32 fastreid.utils.events]:  eta: 2:14:13  epoch/iter: 16/10029  total_loss: 69.38  loss_cls: 49.97  loss_triplet: 19.26  time: 0.3121  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:07:26 fastreid.utils.events]:  eta: 2:13:19  epoch/iter: 17/10199  total_loss: 69.12  loss_cls: 49.94  loss_triplet: 19.2  time: 0.3121  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:08:30 fastreid.utils.events]:  eta: 2:12:14  epoch/iter: 17/10399  total_loss: 69.19  loss_cls: 49.95  loss_triplet: 19.26  time: 0.3122  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:09:33 fastreid.utils.events]:  eta: 2:11:08  epoch/iter: 17/10599  total_loss: 69.65  loss_cls: 49.97  loss_triplet: 19.71  time: 0.3123  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:09:39 fastreid.utils.events]:  eta: 2:11:01  epoch/iter: 17/10619  total_loss: 69.79  loss_cls: 49.94  loss_triplet: 19.73  time: 0.3123  data_time: 0.0006  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:10:36 fastreid.utils.events]:  eta: 2:10:01  epoch/iter: 18/10799  total_loss: 69.71  loss_cls: 49.91  loss_triplet: 19.82  time: 0.3124  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:11:40 fastreid.utils.events]:  eta: 2:08:58  epoch/iter: 18/10999  total_loss: 69.29  loss_cls: 49.88  loss_triplet: 19.46  time: 0.3125  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:12:43 fastreid.utils.events]:  eta: 2:07:54  epoch/iter: 18/11199  total_loss: 69.24  loss_cls: 49.96  loss_triplet: 19.26  time: 0.3126  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:12:46 fastreid.utils.events]:  eta: 2:07:51  epoch/iter: 18/11209  total_loss: 69.2  loss_cls: 49.94  loss_triplet: 19.15  time: 0.3126  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:13:47 fastreid.utils.events]:  eta: 2:06:52  epoch/iter: 19/11399  total_loss: 69.36  loss_cls: 49.9  loss_triplet: 19.41  time: 0.3126  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:14:50 fastreid.utils.events]:  eta: 2:05:50  epoch/iter: 19/11599  total_loss: 69.41  loss_cls: 49.94  loss_triplet: 19.28  time: 0.3127  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:15:53 fastreid.utils.events]:  eta: 2:04:45  epoch/iter: 19/11799  total_loss: 69.45  loss_cls: 49.93  loss_triplet: 19.66  time: 0.3128  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:15:53 fastreid.engine.defaults]: Prepare testing set
+[10/23 09:15:53 fastreid.data.datasets.bases]: => Loaded VeRi in csv format: 
+| subset   | # ids   | # images   | # cameras   |
+|:---------|:--------|:-----------|:------------|
+| query    | 200     | 1678       | 19          |
+| gallery  | 200     | 11579      | 19          |
+[10/23 09:15:53 fastreid.evaluation.evaluator]: Start inference on 13257 images
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 09:16:00 fastreid.evaluation.evaluator]: Inference done 11/52. 0.3919 s / batch. ETA=0:00:17
+[10/23 09:16:18 fastreid.evaluation.evaluator]: Total inference time: 0:00:21.281974 (0.452808 s / batch per device, on 1 devices)
+[10/23 09:16:18 fastreid.evaluation.evaluator]: Total inference pure compute time: 0:00:18 (0.388513 s / batch per device, on 1 devices)
+[10/23 09:16:19 fastreid.engine.defaults]: Evaluation results for VeRi in csv format:
+[10/23 09:16:19 fastreid.evaluation.testing]: Evaluation results in csv format: 
+| Dataset   | Rank-1   | Rank-5   | Rank-10   | mAP   | mINP   | metric   |
+|:----------|:---------|:---------|:----------|:------|:-------|:---------|
+| VeRi      | 22.17    | 34.92    | 42.49     | 5.16  | 0.67   | 13.66    |
+[10/23 09:16:20 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_best.pth
+[10/23 09:16:20 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_0019.pth
+[10/23 09:16:20 fastreid.utils.events]:  eta: 2:04:45  epoch/iter: 19/11799  total_loss: 69.45  loss_cls: 49.93  loss_triplet: 19.66  time: 0.3128  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:17:22 fastreid.utils.events]:  eta: 2:03:35  epoch/iter: 20/11999  total_loss: 69.33  loss_cls: 49.88  loss_triplet: 19.17  time: 0.3128  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:18:25 fastreid.utils.events]:  eta: 2:02:27  epoch/iter: 20/12199  total_loss: 69.64  loss_cls: 49.94  loss_triplet: 19.66  time: 0.3128  data_time: 0.0009  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:19:25 fastreid.utils.events]:  eta: 2:01:20  epoch/iter: 20/12389  total_loss: 69.64  loss_cls: 49.9  loss_triplet: 19.63  time: 0.3128  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:19:28 fastreid.utils.events]:  eta: 2:01:16  epoch/iter: 21/12399  total_loss: 69.68  loss_cls: 49.89  loss_triplet: 19.75  time: 0.3128  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:20:32 fastreid.utils.events]:  eta: 2:00:10  epoch/iter: 21/12599  total_loss: 69.31  loss_cls: 49.97  loss_triplet: 19.31  time: 0.3129  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:21:35 fastreid.utils.events]:  eta: 1:59:09  epoch/iter: 21/12799  total_loss: 69.72  loss_cls: 49.95  loss_triplet: 19.87  time: 0.3130  data_time: 0.0007  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:22:32 fastreid.utils.events]:  eta: 1:58:22  epoch/iter: 21/12979  total_loss: 69.44  loss_cls: 49.9  loss_triplet: 19.7  time: 0.3130  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:22:38 fastreid.utils.events]:  eta: 1:58:16  epoch/iter: 22/12999  total_loss: 69.58  loss_cls: 49.89  loss_triplet: 19.87  time: 0.3130  data_time: 0.0006  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:23:42 fastreid.utils.events]:  eta: 1:57:15  epoch/iter: 22/13199  total_loss: 69.32  loss_cls: 49.93  loss_triplet: 19.29  time: 0.3131  data_time: 0.0010  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:24:45 fastreid.utils.events]:  eta: 1:56:13  epoch/iter: 22/13399  total_loss: 69.38  loss_cls: 49.92  loss_triplet: 19.56  time: 0.3131  data_time: 0.0010  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:25:39 fastreid.utils.events]:  eta: 1:55:19  epoch/iter: 22/13569  total_loss: 69.41  loss_cls: 49.92  loss_triplet: 19.52  time: 0.3132  data_time: 0.0003  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:25:48 fastreid.utils.events]:  eta: 1:55:09  epoch/iter: 23/13599  total_loss: 69.46  loss_cls: 49.95  loss_triplet: 19.52  time: 0.3132  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:26:52 fastreid.utils.events]:  eta: 1:54:07  epoch/iter: 23/13799  total_loss: 69.14  loss_cls: 49.9  loss_triplet: 19.37  time: 0.3132  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:27:55 fastreid.utils.events]:  eta: 1:53:04  epoch/iter: 23/13999  total_loss: 69.62  loss_cls: 49.98  loss_triplet: 19.71  time: 0.3133  data_time: 0.0005  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:28:46 fastreid.utils.events]:  eta: 1:52:15  epoch/iter: 23/14159  total_loss: 69.83  loss_cls: 49.88  loss_triplet: 19.85  time: 0.3133  data_time: 0.0004  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:28:59 fastreid.utils.events]:  eta: 1:52:03  epoch/iter: 24/14199  total_loss: 69.74  loss_cls: 49.87  loss_triplet: 19.59  time: 0.3133  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:30:02 fastreid.utils.events]:  eta: 1:51:01  epoch/iter: 24/14399  total_loss: 69.27  loss_cls: 49.95  loss_triplet: 19.43  time: 0.3134  data_time: 0.0007  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:31:06 fastreid.utils.events]:  eta: 1:49:58  epoch/iter: 24/14599  total_loss: 69.78  loss_cls: 49.91  loss_triplet: 19.73  time: 0.3134  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:31:53 fastreid.utils.events]:  eta: 1:49:11  epoch/iter: 24/14749  total_loss: 69.49  loss_cls: 49.93  loss_triplet: 19.65  time: 0.3135  data_time: 0.0012  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:32:09 fastreid.utils.events]:  eta: 1:48:56  epoch/iter: 25/14799  total_loss: 69.45  loss_cls: 49.95  loss_triplet: 19.44  time: 0.3135  data_time: 0.0009  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:33:12 fastreid.utils.events]:  eta: 1:47:52  epoch/iter: 25/14999  total_loss: 69.29  loss_cls: 49.93  loss_triplet: 19.29  time: 0.3135  data_time: 0.0013  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:34:16 fastreid.utils.events]:  eta: 1:46:47  epoch/iter: 25/15199  total_loss: 69.43  loss_cls: 49.88  loss_triplet: 19.43  time: 0.3136  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:35:00 fastreid.utils.events]:  eta: 1:45:58  epoch/iter: 25/15339  total_loss: 69.13  loss_cls: 49.87  loss_triplet: 19.32  time: 0.3136  data_time: 0.0017  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:35:19 fastreid.utils.events]:  eta: 1:45:38  epoch/iter: 26/15399  total_loss: 69.25  loss_cls: 49.88  loss_triplet: 19.4  time: 0.3136  data_time: 0.0010  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:36:22 fastreid.utils.events]:  eta: 1:44:33  epoch/iter: 26/15599  total_loss: 69.03  loss_cls: 49.92  loss_triplet: 19.1  time: 0.3136  data_time: 0.0016  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:37:25 fastreid.utils.events]:  eta: 1:43:30  epoch/iter: 26/15799  total_loss: 69.73  loss_cls: 49.91  loss_triplet: 19.83  time: 0.3137  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:38:07 fastreid.utils.events]:  eta: 1:42:50  epoch/iter: 26/15929  total_loss: 69.72  loss_cls: 49.94  loss_triplet: 19.73  time: 0.3137  data_time: 0.0009  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:38:29 fastreid.utils.events]:  eta: 1:42:28  epoch/iter: 27/15999  total_loss: 69.62  loss_cls: 49.96  loss_triplet: 19.52  time: 0.3137  data_time: 0.0015  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:39:32 fastreid.utils.events]:  eta: 1:41:27  epoch/iter: 27/16199  total_loss: 69.76  loss_cls: 49.93  loss_triplet: 19.86  time: 0.3138  data_time: 0.0012  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:40:36 fastreid.utils.events]:  eta: 1:40:27  epoch/iter: 27/16399  total_loss: 69.99  loss_cls: 49.98  loss_triplet: 19.9  time: 0.3138  data_time: 0.0010  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:41:14 fastreid.utils.events]:  eta: 1:39:51  epoch/iter: 27/16519  total_loss: 69.66  loss_cls: 49.98  loss_triplet: 19.67  time: 0.3138  data_time: 0.0016  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:41:39 fastreid.utils.events]:  eta: 1:39:26  epoch/iter: 28/16599  total_loss: 69.86  loss_cls: 49.97  loss_triplet: 19.76  time: 0.3139  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:42:43 fastreid.utils.events]:  eta: 1:38:24  epoch/iter: 28/16799  total_loss: 69.74  loss_cls: 49.94  loss_triplet: 19.77  time: 0.3139  data_time: 0.0011  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:43:46 fastreid.utils.events]:  eta: 1:37:21  epoch/iter: 28/16999  total_loss: 69.5  loss_cls: 49.94  loss_triplet: 19.57  time: 0.3139  data_time: 0.0015  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:44:21 fastreid.utils.events]:  eta: 1:36:47  epoch/iter: 28/17109  total_loss: 69.64  loss_cls: 49.94  loss_triplet: 19.75  time: 0.3140  data_time: 0.0015  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:44:50 fastreid.utils.events]:  eta: 1:36:19  epoch/iter: 29/17199  total_loss: 69.64  loss_cls: 49.95  loss_triplet: 19.74  time: 0.3140  data_time: 0.0015  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:45:53 fastreid.utils.events]:  eta: 1:35:15  epoch/iter: 29/17399  total_loss: 69.4  loss_cls: 49.93  loss_triplet: 19.38  time: 0.3140  data_time: 0.0008  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:46:57 fastreid.utils.events]:  eta: 1:34:12  epoch/iter: 29/17599  total_loss: 69.5  loss_cls: 49.92  loss_triplet: 19.51  time: 0.3141  data_time: 0.0009  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:47:28 fastreid.engine.defaults]: Prepare testing set
+[10/23 09:47:29 fastreid.data.datasets.bases]: => Loaded VeRi in csv format: 
+| subset   | # ids   | # images   | # cameras   |
+|:---------|:--------|:-----------|:------------|
+| query    | 200     | 1678       | 19          |
+| gallery  | 200     | 11579      | 19          |
+[10/23 09:47:29 fastreid.evaluation.evaluator]: Start inference on 13257 images
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 09:47:35 fastreid.evaluation.evaluator]: Inference done 11/52. 0.3959 s / batch. ETA=0:00:17
+[10/23 09:47:54 fastreid.evaluation.evaluator]: Total inference time: 0:00:20.868123 (0.444003 s / batch per device, on 1 devices)
+[10/23 09:47:54 fastreid.evaluation.evaluator]: Total inference pure compute time: 0:00:18 (0.394329 s / batch per device, on 1 devices)
+[10/23 09:47:55 fastreid.engine.defaults]: Evaluation results for VeRi in csv format:
+[10/23 09:47:55 fastreid.evaluation.testing]: Evaluation results in csv format: 
+| Dataset   | Rank-1   | Rank-5   | Rank-10   | mAP   | mINP   | metric   |
+|:----------|:---------|:---------|:----------|:------|:-------|:---------|
+| VeRi      | 21.63    | 34.92    | 41.95     | 5.17  | 0.67   | 13.40    |
+[10/23 09:47:55 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_0029.pth
+[10/23 09:47:55 fastreid.utils.events]:  eta: 1:33:39  epoch/iter: 29/17699  total_loss: 69.61  loss_cls: 49.89  loss_triplet: 19.74  time: 0.3141  data_time: 0.0012  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:48:27 fastreid.utils.events]:  eta: 1:33:07  epoch/iter: 30/17799  total_loss: 69.62  loss_cls: 49.88  loss_triplet: 19.66  time: 0.3141  data_time: 0.0020  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:49:30 fastreid.utils.events]:  eta: 1:32:04  epoch/iter: 30/17999  total_loss: 69.51  loss_cls: 49.96  loss_triplet: 19.64  time: 0.3141  data_time: 0.0017  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:50:34 fastreid.utils.events]:  eta: 1:30:59  epoch/iter: 30/18199  total_loss: 69.91  loss_cls: 49.87  loss_triplet: 20.03  time: 0.3142  data_time: 0.0015  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:51:02 fastreid.utils.events]:  eta: 1:30:29  epoch/iter: 30/18289  total_loss: 69.61  loss_cls: 49.86  loss_triplet: 19.65  time: 0.3142  data_time: 0.0013  lr: 1.00e-02  max_mem: 11888M
+[10/23 09:51:37 fastreid.utils.events]:  eta: 1:29:53  epoch/iter: 31/18399  total_loss: 69.04  loss_cls: 49.9  loss_triplet: 19.26  time: 0.3142  data_time: 0.0016  lr: 9.97e-03  max_mem: 11888M
+[10/23 09:52:40 fastreid.utils.events]:  eta: 1:28:46  epoch/iter: 31/18599  total_loss: 69.62  loss_cls: 49.91  loss_triplet: 19.6  time: 0.3142  data_time: 0.0014  lr: 9.97e-03  max_mem: 11888M
+[10/23 09:53:43 fastreid.utils.events]:  eta: 1:27:44  epoch/iter: 31/18799  total_loss: 69.36  loss_cls: 49.91  loss_triplet: 19.54  time: 0.3142  data_time: 0.0014  lr: 9.97e-03  max_mem: 11888M
+[10/23 09:54:09 fastreid.utils.events]:  eta: 1:27:20  epoch/iter: 31/18879  total_loss: 69.41  loss_cls: 49.95  loss_triplet: 19.54  time: 0.3142  data_time: 0.0007  lr: 9.97e-03  max_mem: 11888M
+[10/23 09:54:47 fastreid.utils.events]:  eta: 1:26:42  epoch/iter: 32/18999  total_loss: 69.69  loss_cls: 49.95  loss_triplet: 19.74  time: 0.3142  data_time: 0.0011  lr: 9.89e-03  max_mem: 11888M
+[10/23 09:55:51 fastreid.utils.events]:  eta: 1:25:40  epoch/iter: 32/19199  total_loss: 69.98  loss_cls: 49.93  loss_triplet: 20.09  time: 0.3143  data_time: 0.0009  lr: 9.89e-03  max_mem: 11888M
+[10/23 09:56:54 fastreid.utils.events]:  eta: 1:24:40  epoch/iter: 32/19399  total_loss: 69.48  loss_cls: 49.89  loss_triplet: 19.41  time: 0.3143  data_time: 0.0010  lr: 9.89e-03  max_mem: 11888M
+[10/23 09:57:16 fastreid.utils.events]:  eta: 1:24:20  epoch/iter: 32/19469  total_loss: 69.51  loss_cls: 49.88  loss_triplet: 19.58  time: 0.3143  data_time: 0.0010  lr: 9.89e-03  max_mem: 11888M
+[10/23 09:57:58 fastreid.utils.events]:  eta: 1:23:41  epoch/iter: 33/19599  total_loss: 69.88  loss_cls: 49.89  loss_triplet: 19.81  time: 0.3143  data_time: 0.0011  lr: 9.76e-03  max_mem: 11888M
+[10/23 09:59:01 fastreid.utils.events]:  eta: 1:22:38  epoch/iter: 33/19799  total_loss: 69.63  loss_cls: 49.91  loss_triplet: 19.7  time: 0.3144  data_time: 0.0011  lr: 9.76e-03  max_mem: 11888M
+[10/23 10:00:04 fastreid.utils.events]:  eta: 1:21:34  epoch/iter: 33/19999  total_loss: 69.12  loss_cls: 49.85  loss_triplet: 19.39  time: 0.3144  data_time: 0.0007  lr: 9.76e-03  max_mem: 11888M
+[10/23 10:00:23 fastreid.utils.events]:  eta: 1:21:14  epoch/iter: 33/20059  total_loss: 69.5  loss_cls: 49.94  loss_triplet: 19.61  time: 0.3144  data_time: 0.0009  lr: 9.76e-03  max_mem: 11888M
+[10/23 10:01:08 fastreid.utils.events]:  eta: 1:20:29  epoch/iter: 34/20199  total_loss: 69.41  loss_cls: 49.98  loss_triplet: 19.34  time: 0.3144  data_time: 0.0005  lr: 9.57e-03  max_mem: 11888M
+[10/23 10:02:11 fastreid.utils.events]:  eta: 1:19:26  epoch/iter: 34/20399  total_loss: 69.61  loss_cls: 49.97  loss_triplet: 19.74  time: 0.3145  data_time: 0.0010  lr: 9.57e-03  max_mem: 11888M
+[10/23 10:03:15 fastreid.utils.events]:  eta: 1:18:22  epoch/iter: 34/20599  total_loss: 69.44  loss_cls: 49.97  loss_triplet: 19.65  time: 0.3145  data_time: 0.0004  lr: 9.57e-03  max_mem: 11888M
+[10/23 10:03:31 fastreid.utils.events]:  eta: 1:18:05  epoch/iter: 34/20649  total_loss: 69.45  loss_cls: 49.98  loss_triplet: 19.65  time: 0.3145  data_time: 0.0006  lr: 9.57e-03  max_mem: 11888M
+[10/23 10:04:18 fastreid.utils.events]:  eta: 1:17:19  epoch/iter: 35/20799  total_loss: 69.22  loss_cls: 49.89  loss_triplet: 19.4  time: 0.3145  data_time: 0.0005  lr: 9.34e-03  max_mem: 11888M
+[10/23 10:05:22 fastreid.utils.events]:  eta: 1:16:16  epoch/iter: 35/20999  total_loss: 69.71  loss_cls: 49.9  loss_triplet: 19.78  time: 0.3146  data_time: 0.0009  lr: 9.34e-03  max_mem: 11888M
+[10/23 10:06:26 fastreid.utils.events]:  eta: 1:15:13  epoch/iter: 35/21199  total_loss: 69.25  loss_cls: 49.94  loss_triplet: 19.36  time: 0.3146  data_time: 0.0007  lr: 9.34e-03  max_mem: 11888M
+[10/23 10:06:38 fastreid.utils.events]:  eta: 1:15:00  epoch/iter: 35/21239  total_loss: 69.25  loss_cls: 49.94  loss_triplet: 19.36  time: 0.3146  data_time: 0.0007  lr: 9.34e-03  max_mem: 11888M
+[10/23 10:07:29 fastreid.utils.events]:  eta: 1:14:10  epoch/iter: 36/21399  total_loss: 69.85  loss_cls: 49.97  loss_triplet: 19.93  time: 0.3146  data_time: 0.0017  lr: 9.05e-03  max_mem: 11888M
+[10/23 10:08:33 fastreid.utils.events]:  eta: 1:13:04  epoch/iter: 36/21599  total_loss: 69.62  loss_cls: 49.96  loss_triplet: 19.68  time: 0.3146  data_time: 0.0010  lr: 9.05e-03  max_mem: 11888M
+[10/23 10:09:36 fastreid.utils.events]:  eta: 1:11:56  epoch/iter: 36/21799  total_loss: 69.82  loss_cls: 49.93  loss_triplet: 19.8  time: 0.3146  data_time: 0.0005  lr: 9.05e-03  max_mem: 11888M
+[10/23 10:09:45 fastreid.utils.events]:  eta: 1:11:46  epoch/iter: 36/21829  total_loss: 69.96  loss_cls: 49.95  loss_triplet: 20.02  time: 0.3146  data_time: 0.0003  lr: 9.05e-03  max_mem: 11888M
+[10/23 10:10:39 fastreid.utils.events]:  eta: 1:10:47  epoch/iter: 37/21999  total_loss: 69.83  loss_cls: 49.91  loss_triplet: 20.02  time: 0.3146  data_time: 0.0006  lr: 8.73e-03  max_mem: 11888M
+[10/23 10:11:42 fastreid.utils.events]:  eta: 1:09:41  epoch/iter: 37/22199  total_loss: 69.23  loss_cls: 49.86  loss_triplet: 19.29  time: 0.3147  data_time: 0.0007  lr: 8.73e-03  max_mem: 11888M
+[10/23 10:12:45 fastreid.utils.events]:  eta: 1:08:36  epoch/iter: 37/22399  total_loss: 69.52  loss_cls: 49.95  loss_triplet: 19.6  time: 0.3147  data_time: 0.0006  lr: 8.73e-03  max_mem: 11888M
+[10/23 10:12:52 fastreid.utils.events]:  eta: 1:08:30  epoch/iter: 37/22419  total_loss: 69.46  loss_cls: 49.95  loss_triplet: 19.54  time: 0.3147  data_time: 0.0008  lr: 8.73e-03  max_mem: 11888M
+[10/23 10:13:49 fastreid.utils.events]:  eta: 1:07:36  epoch/iter: 38/22599  total_loss: 69.04  loss_cls: 49.92  loss_triplet: 19.27  time: 0.3147  data_time: 0.0005  lr: 8.36e-03  max_mem: 11888M
+[10/23 10:14:52 fastreid.utils.events]:  eta: 1:06:36  epoch/iter: 38/22799  total_loss: 69.86  loss_cls: 49.94  loss_triplet: 19.92  time: 0.3147  data_time: 0.0004  lr: 8.36e-03  max_mem: 11888M
+[10/23 10:15:55 fastreid.utils.events]:  eta: 1:05:35  epoch/iter: 38/22999  total_loss: 70  loss_cls: 49.96  loss_triplet: 19.97  time: 0.3147  data_time: 0.0010  lr: 8.36e-03  max_mem: 11888M
+[10/23 10:15:59 fastreid.utils.events]:  eta: 1:05:31  epoch/iter: 38/23009  total_loss: 70.1  loss_cls: 49.97  loss_triplet: 20  time: 0.3147  data_time: 0.0020  lr: 8.36e-03  max_mem: 11888M
+[10/23 10:16:59 fastreid.utils.events]:  eta: 1:04:31  epoch/iter: 39/23199  total_loss: 69.73  loss_cls: 49.92  loss_triplet: 19.76  time: 0.3148  data_time: 0.0005  lr: 7.95e-03  max_mem: 11888M
+[10/23 10:18:02 fastreid.utils.events]:  eta: 1:03:28  epoch/iter: 39/23399  total_loss: 69.4  loss_cls: 49.93  loss_triplet: 19.52  time: 0.3148  data_time: 0.0004  lr: 7.95e-03  max_mem: 11888M
+[10/23 10:19:05 fastreid.utils.events]:  eta: 1:02:23  epoch/iter: 39/23599  total_loss: 69.6  loss_cls: 49.98  loss_triplet: 19.72  time: 0.3148  data_time: 0.0006  lr: 7.95e-03  max_mem: 11888M
+[10/23 10:19:05 fastreid.engine.defaults]: Prepare testing set
+[10/23 10:19:06 fastreid.data.datasets.bases]: => Loaded VeRi in csv format: 
+| subset   | # ids   | # images   | # cameras   |
+|:---------|:--------|:-----------|:------------|
+| query    | 200     | 1678       | 19          |
+| gallery  | 200     | 11579      | 19          |
+[10/23 10:19:06 fastreid.evaluation.evaluator]: Start inference on 13257 images
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 10:19:12 fastreid.evaluation.evaluator]: Inference done 11/52. 0.3965 s / batch. ETA=0:00:17
+[10/23 10:19:31 fastreid.evaluation.evaluator]: Total inference time: 0:00:20.938678 (0.445504 s / batch per device, on 1 devices)
+[10/23 10:19:31 fastreid.evaluation.evaluator]: Total inference pure compute time: 0:00:18 (0.392897 s / batch per device, on 1 devices)
+[10/23 10:19:32 fastreid.engine.defaults]: Evaluation results for VeRi in csv format:
+[10/23 10:19:32 fastreid.evaluation.testing]: Evaluation results in csv format: 
+| Dataset   | Rank-1   | Rank-5   | Rank-10   | mAP   | mINP   | metric   |
+|:----------|:---------|:---------|:----------|:------|:-------|:---------|
+| VeRi      | 21.57    | 34.51    | 41.95     | 5.22  | 0.68   | 13.40    |
+[10/23 10:19:32 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_0039.pth
+[10/23 10:19:32 fastreid.utils.events]:  eta: 1:02:23  epoch/iter: 39/23599  total_loss: 69.6  loss_cls: 49.98  loss_triplet: 19.72  time: 0.3148  data_time: 0.0006  lr: 7.95e-03  max_mem: 11888M
+[10/23 10:20:35 fastreid.utils.events]:  eta: 1:01:18  epoch/iter: 40/23799  total_loss: 69.68  loss_cls: 49.94  loss_triplet: 19.75  time: 0.3148  data_time: 0.0004  lr: 7.52e-03  max_mem: 11888M
+[10/23 10:21:39 fastreid.utils.events]:  eta: 1:00:15  epoch/iter: 40/23999  total_loss: 69.36  loss_cls: 49.91  loss_triplet: 19.69  time: 0.3148  data_time: 0.0007  lr: 7.52e-03  max_mem: 11888M
+[10/23 10:22:38 fastreid.utils.events]:  eta: 0:59:10  epoch/iter: 40/24189  total_loss: 69.88  loss_cls: 49.86  loss_triplet: 19.65  time: 0.3148  data_time: 0.0006  lr: 7.52e-03  max_mem: 11888M
+[10/23 10:22:41 fastreid.utils.events]:  eta: 0:59:06  epoch/iter: 41/24199  total_loss: 70.04  loss_cls: 49.86  loss_triplet: 19.85  time: 0.3148  data_time: 0.0006  lr: 7.06e-03  max_mem: 11888M
+[10/23 10:23:44 fastreid.utils.events]:  eta: 0:57:54  epoch/iter: 41/24399  total_loss: 69.48  loss_cls: 49.97  loss_triplet: 19.6  time: 0.3148  data_time: 0.0005  lr: 7.06e-03  max_mem: 11888M
+[10/23 10:24:46 fastreid.utils.events]:  eta: 0:56:42  epoch/iter: 41/24599  total_loss: 69.88  loss_cls: 49.89  loss_triplet: 19.93  time: 0.3148  data_time: 0.0015  lr: 7.06e-03  max_mem: 11888M
+[10/23 10:25:43 fastreid.utils.events]:  eta: 0:55:37  epoch/iter: 41/24779  total_loss: 69.79  loss_cls: 49.95  loss_triplet: 19.96  time: 0.3147  data_time: 0.0004  lr: 7.06e-03  max_mem: 11888M
+[10/23 10:25:49 fastreid.utils.events]:  eta: 0:55:29  epoch/iter: 42/24799  total_loss: 69.91  loss_cls: 49.95  loss_triplet: 20.07  time: 0.3147  data_time: 0.0005  lr: 6.57e-03  max_mem: 11888M
+[10/23 10:26:51 fastreid.utils.events]:  eta: 0:54:13  epoch/iter: 42/24999  total_loss: 69.67  loss_cls: 49.92  loss_triplet: 19.66  time: 0.3147  data_time: 0.0005  lr: 6.57e-03  max_mem: 11888M
+[10/23 10:27:53 fastreid.utils.events]:  eta: 0:53:00  epoch/iter: 42/25199  total_loss: 69.72  loss_cls: 49.92  loss_triplet: 19.8  time: 0.3147  data_time: 0.0005  lr: 6.57e-03  max_mem: 11888M
+[10/23 10:28:46 fastreid.utils.events]:  eta: 0:52:02  epoch/iter: 42/25369  total_loss: 69.61  loss_cls: 49.94  loss_triplet: 19.71  time: 0.3146  data_time: 0.0003  lr: 6.57e-03  max_mem: 11888M
+[10/23 10:28:55 fastreid.utils.events]:  eta: 0:51:53  epoch/iter: 43/25399  total_loss: 69.45  loss_cls: 49.88  loss_triplet: 19.6  time: 0.3146  data_time: 0.0004  lr: 6.07e-03  max_mem: 11888M
+[10/23 10:29:57 fastreid.utils.events]:  eta: 0:50:45  epoch/iter: 43/25599  total_loss: 69.14  loss_cls: 49.99  loss_triplet: 19.15  time: 0.3146  data_time: 0.0004  lr: 6.07e-03  max_mem: 11888M
+[10/23 10:30:59 fastreid.utils.events]:  eta: 0:49:40  epoch/iter: 43/25799  total_loss: 69.44  loss_cls: 49.89  loss_triplet: 19.48  time: 0.3146  data_time: 0.0002  lr: 6.07e-03  max_mem: 11888M
+[10/23 10:31:49 fastreid.utils.events]:  eta: 0:48:47  epoch/iter: 43/25959  total_loss: 69.34  loss_cls: 49.92  loss_triplet: 19.42  time: 0.3145  data_time: 0.0005  lr: 6.07e-03  max_mem: 11888M
+[10/23 10:32:01 fastreid.utils.events]:  eta: 0:48:34  epoch/iter: 44/25999  total_loss: 69.35  loss_cls: 49.93  loss_triplet: 19.52  time: 0.3145  data_time: 0.0018  lr: 5.56e-03  max_mem: 11888M
+[10/23 10:33:03 fastreid.utils.events]:  eta: 0:47:30  epoch/iter: 44/26199  total_loss: 69.02  loss_cls: 49.96  loss_triplet: 18.98  time: 0.3145  data_time: 0.0006  lr: 5.56e-03  max_mem: 11888M
+[10/23 10:34:05 fastreid.utils.events]:  eta: 0:46:25  epoch/iter: 44/26399  total_loss: 69.43  loss_cls: 49.98  loss_triplet: 19.57  time: 0.3144  data_time: 0.0011  lr: 5.56e-03  max_mem: 11888M
+[10/23 10:34:51 fastreid.utils.events]:  eta: 0:45:36  epoch/iter: 44/26549  total_loss: 69.43  loss_cls: 49.97  loss_triplet: 19.48  time: 0.3144  data_time: 0.0007  lr: 5.56e-03  max_mem: 11888M
+[10/23 10:35:06 fastreid.utils.events]:  eta: 0:45:23  epoch/iter: 45/26599  total_loss: 69.45  loss_cls: 49.95  loss_triplet: 19.38  time: 0.3144  data_time: 0.0010  lr: 5.04e-03  max_mem: 11888M
+[10/23 10:36:09 fastreid.utils.events]:  eta: 0:44:23  epoch/iter: 45/26799  total_loss: 69.47  loss_cls: 49.93  loss_triplet: 19.57  time: 0.3144  data_time: 0.0005  lr: 5.04e-03  max_mem: 11888M
+[10/23 10:37:11 fastreid.utils.events]:  eta: 0:43:26  epoch/iter: 45/26999  total_loss: 69.81  loss_cls: 49.95  loss_triplet: 19.74  time: 0.3143  data_time: 0.0008  lr: 5.04e-03  max_mem: 11888M
+[10/23 10:37:54 fastreid.utils.events]:  eta: 0:42:41  epoch/iter: 45/27139  total_loss: 69.35  loss_cls: 49.93  loss_triplet: 19.32  time: 0.3143  data_time: 0.0008  lr: 5.04e-03  max_mem: 11888M
+[10/23 10:38:13 fastreid.utils.events]:  eta: 0:42:24  epoch/iter: 46/27199  total_loss: 69.07  loss_cls: 49.91  loss_triplet: 19.44  time: 0.3143  data_time: 0.0005  lr: 4.52e-03  max_mem: 11888M
+[10/23 10:39:15 fastreid.utils.events]:  eta: 0:41:23  epoch/iter: 46/27399  total_loss: 69.5  loss_cls: 49.91  loss_triplet: 19.54  time: 0.3143  data_time: 0.0004  lr: 4.52e-03  max_mem: 11888M
+[10/23 10:40:17 fastreid.utils.events]:  eta: 0:40:24  epoch/iter: 46/27599  total_loss: 69.31  loss_cls: 49.94  loss_triplet: 19.38  time: 0.3143  data_time: 0.0013  lr: 4.52e-03  max_mem: 11888M
+[10/23 10:40:58 fastreid.utils.events]:  eta: 0:39:45  epoch/iter: 46/27729  total_loss: 69.85  loss_cls: 49.91  loss_triplet: 19.83  time: 0.3142  data_time: 0.0015  lr: 4.52e-03  max_mem: 11888M
+[10/23 10:41:19 fastreid.utils.events]:  eta: 0:39:23  epoch/iter: 47/27799  total_loss: 69.98  loss_cls: 49.97  loss_triplet: 19.9  time: 0.3142  data_time: 0.0009  lr: 4.01e-03  max_mem: 11888M
+[10/23 10:42:22 fastreid.utils.events]:  eta: 0:38:23  epoch/iter: 47/27999  total_loss: 69.25  loss_cls: 49.93  loss_triplet: 19.4  time: 0.3142  data_time: 0.0012  lr: 4.01e-03  max_mem: 11888M
+[10/23 10:43:24 fastreid.utils.events]:  eta: 0:37:24  epoch/iter: 47/28199  total_loss: 69.54  loss_cls: 49.95  loss_triplet: 19.47  time: 0.3142  data_time: 0.0010  lr: 4.01e-03  max_mem: 11888M
+[10/23 10:44:01 fastreid.utils.events]:  eta: 0:36:47  epoch/iter: 47/28319  total_loss: 69.29  loss_cls: 49.91  loss_triplet: 19.35  time: 0.3142  data_time: 0.0012  lr: 4.01e-03  max_mem: 11888M
+[10/23 10:44:26 fastreid.utils.events]:  eta: 0:36:23  epoch/iter: 48/28399  total_loss: 69.55  loss_cls: 49.93  loss_triplet: 19.48  time: 0.3142  data_time: 0.0012  lr: 3.51e-03  max_mem: 11888M
+[10/23 10:45:28 fastreid.utils.events]:  eta: 0:35:20  epoch/iter: 48/28599  total_loss: 69.71  loss_cls: 49.92  loss_triplet: 19.9  time: 0.3142  data_time: 0.0012  lr: 3.51e-03  max_mem: 11888M
+[10/23 10:46:31 fastreid.utils.events]:  eta: 0:34:19  epoch/iter: 48/28799  total_loss: 69.85  loss_cls: 49.89  loss_triplet: 19.96  time: 0.3141  data_time: 0.0011  lr: 3.51e-03  max_mem: 11888M
+[10/23 10:47:05 fastreid.utils.events]:  eta: 0:33:43  epoch/iter: 48/28909  total_loss: 69.69  loss_cls: 49.93  loss_triplet: 19.67  time: 0.3141  data_time: 0.0014  lr: 3.51e-03  max_mem: 11888M
+[10/23 10:47:33 fastreid.utils.events]:  eta: 0:33:15  epoch/iter: 49/28999  total_loss: 69.56  loss_cls: 49.86  loss_triplet: 19.61  time: 0.3141  data_time: 0.0011  lr: 3.02e-03  max_mem: 11888M
+[10/23 10:48:35 fastreid.utils.events]:  eta: 0:32:13  epoch/iter: 49/29199  total_loss: 69.16  loss_cls: 49.95  loss_triplet: 19.36  time: 0.3141  data_time: 0.0016  lr: 3.02e-03  max_mem: 11888M
+[10/23 10:49:38 fastreid.utils.events]:  eta: 0:31:12  epoch/iter: 49/29399  total_loss: 69.46  loss_cls: 49.98  loss_triplet: 19.62  time: 0.3141  data_time: 0.0014  lr: 3.02e-03  max_mem: 11888M
+[10/23 10:50:09 fastreid.engine.defaults]: Prepare testing set
+[10/23 10:50:09 fastreid.data.datasets.bases]: => Loaded VeRi in csv format: 
+| subset   | # ids   | # images   | # cameras   |
+|:---------|:--------|:-----------|:------------|
+| query    | 200     | 1678       | 19          |
+| gallery  | 200     | 11579      | 19          |
+[10/23 10:50:09 fastreid.evaluation.evaluator]: Start inference on 13257 images
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 10:50:15 fastreid.evaluation.evaluator]: Inference done 11/52. 0.3894 s / batch. ETA=0:00:17
+[10/23 10:50:35 fastreid.evaluation.evaluator]: Total inference time: 0:00:22.388074 (0.476342 s / batch per device, on 1 devices)
+[10/23 10:50:35 fastreid.evaluation.evaluator]: Total inference pure compute time: 0:00:18 (0.383843 s / batch per device, on 1 devices)
+[10/23 10:50:37 fastreid.engine.defaults]: Evaluation results for VeRi in csv format:
+[10/23 10:50:37 fastreid.evaluation.testing]: Evaluation results in csv format: 
+| Dataset   | Rank-1   | Rank-5   | Rank-10   | mAP   | mINP   | metric   |
+|:----------|:---------|:---------|:----------|:------|:-------|:---------|
+| VeRi      | 21.10    | 34.33    | 41.78     | 5.21  | 0.67   | 13.15    |
+[10/23 10:50:37 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_0049.pth
+[10/23 10:50:37 fastreid.utils.events]:  eta: 0:30:41  epoch/iter: 49/29499  total_loss: 69.84  loss_cls: 49.97  loss_triplet: 19.81  time: 0.3141  data_time: 0.0015  lr: 3.02e-03  max_mem: 11888M
+[10/23 10:51:08 fastreid.utils.events]:  eta: 0:30:06  epoch/iter: 50/29599  total_loss: 69.66  loss_cls: 49.94  loss_triplet: 19.78  time: 0.3140  data_time: 0.0011  lr: 2.56e-03  max_mem: 11888M
+[10/23 10:52:10 fastreid.utils.events]:  eta: 0:29:04  epoch/iter: 50/29799  total_loss: 69.58  loss_cls: 49.89  loss_triplet: 19.62  time: 0.3140  data_time: 0.0008  lr: 2.56e-03  max_mem: 11888M
+[10/23 10:53:12 fastreid.utils.events]:  eta: 0:27:57  epoch/iter: 50/29999  total_loss: 69.76  loss_cls: 49.94  loss_triplet: 19.47  time: 0.3140  data_time: 0.0012  lr: 2.56e-03  max_mem: 11888M
+[10/23 10:53:40 fastreid.utils.events]:  eta: 0:27:29  epoch/iter: 50/30089  total_loss: 69.92  loss_cls: 49.97  loss_triplet: 19.82  time: 0.3140  data_time: 0.0031  lr: 2.56e-03  max_mem: 11888M
+[10/23 10:54:15 fastreid.utils.events]:  eta: 0:26:56  epoch/iter: 51/30199  total_loss: 69.67  loss_cls: 49.96  loss_triplet: 19.79  time: 0.3140  data_time: 0.0029  lr: 2.12e-03  max_mem: 11888M
+[10/23 10:55:18 fastreid.utils.events]:  eta: 0:25:54  epoch/iter: 51/30399  total_loss: 69.39  loss_cls: 49.9  loss_triplet: 19.53  time: 0.3140  data_time: 0.0030  lr: 2.12e-03  max_mem: 11888M
+[10/23 10:56:21 fastreid.utils.events]:  eta: 0:25:00  epoch/iter: 51/30599  total_loss: 69.3  loss_cls: 49.95  loss_triplet: 19.38  time: 0.3140  data_time: 0.0038  lr: 2.12e-03  max_mem: 11888M
+[10/23 10:56:47 fastreid.utils.events]:  eta: 0:24:37  epoch/iter: 51/30679  total_loss: 69.37  loss_cls: 49.89  loss_triplet: 19.47  time: 0.3140  data_time: 0.0038  lr: 2.12e-03  max_mem: 11888M
+[10/23 10:57:25 fastreid.utils.events]:  eta: 0:24:02  epoch/iter: 52/30799  total_loss: 69.7  loss_cls: 49.94  loss_triplet: 19.85  time: 0.3140  data_time: 0.0028  lr: 1.72e-03  max_mem: 11888M
+[10/23 10:58:28 fastreid.utils.events]:  eta: 0:23:11  epoch/iter: 52/30999  total_loss: 69.76  loss_cls: 49.98  loss_triplet: 19.89  time: 0.3141  data_time: 0.0028  lr: 1.72e-03  max_mem: 11888M
+[10/23 10:59:32 fastreid.utils.events]:  eta: 0:22:08  epoch/iter: 52/31199  total_loss: 69.62  loss_cls: 49.92  loss_triplet: 19.57  time: 0.3141  data_time: 0.0037  lr: 1.72e-03  max_mem: 11888M
+[10/23 10:59:54 fastreid.utils.events]:  eta: 0:21:46  epoch/iter: 52/31269  total_loss: 69.47  loss_cls: 49.97  loss_triplet: 19.6  time: 0.3141  data_time: 0.0051  lr: 1.72e-03  max_mem: 11888M
+[10/23 11:00:35 fastreid.utils.events]:  eta: 0:21:05  epoch/iter: 53/31399  total_loss: 69.37  loss_cls: 49.88  loss_triplet: 19.42  time: 0.3141  data_time: 0.0042  lr: 1.35e-03  max_mem: 11888M
+[10/23 11:01:37 fastreid.utils.events]:  eta: 0:19:56  epoch/iter: 53/31599  total_loss: 69.51  loss_cls: 49.94  loss_triplet: 19.7  time: 0.3141  data_time: 0.0009  lr: 1.35e-03  max_mem: 11888M
+[10/23 11:02:40 fastreid.utils.events]:  eta: 0:18:51  epoch/iter: 53/31799  total_loss: 69.57  loss_cls: 49.95  loss_triplet: 19.58  time: 0.3141  data_time: 0.0032  lr: 1.35e-03  max_mem: 11888M
+[10/23 11:02:58 fastreid.utils.events]:  eta: 0:18:31  epoch/iter: 53/31859  total_loss: 69.62  loss_cls: 49.9  loss_triplet: 19.58  time: 0.3141  data_time: 0.0013  lr: 1.35e-03  max_mem: 11888M
+[10/23 11:03:42 fastreid.utils.events]:  eta: 0:17:45  epoch/iter: 54/31999  total_loss: 69.8  loss_cls: 49.91  loss_triplet: 19.8  time: 0.3141  data_time: 0.0012  lr: 1.02e-03  max_mem: 11888M
+[10/23 11:04:45 fastreid.utils.events]:  eta: 0:16:40  epoch/iter: 54/32199  total_loss: 69.35  loss_cls: 49.93  loss_triplet: 19.48  time: 0.3140  data_time: 0.0011  lr: 1.02e-03  max_mem: 11888M
+[10/23 11:05:47 fastreid.utils.events]:  eta: 0:15:35  epoch/iter: 54/32399  total_loss: 69.91  loss_cls: 49.99  loss_triplet: 19.64  time: 0.3140  data_time: 0.0011  lr: 1.02e-03  max_mem: 11888M
+[10/23 11:06:02 fastreid.utils.events]:  eta: 0:15:19  epoch/iter: 54/32449  total_loss: 69.77  loss_cls: 49.95  loss_triplet: 19.63  time: 0.3140  data_time: 0.0009  lr: 1.02e-03  max_mem: 11888M
+[10/23 11:06:49 fastreid.utils.events]:  eta: 0:14:32  epoch/iter: 55/32599  total_loss: 69.46  loss_cls: 49.94  loss_triplet: 19.55  time: 0.3140  data_time: 0.0012  lr: 7.42e-04  max_mem: 11888M
+[10/23 11:07:51 fastreid.utils.events]:  eta: 0:13:29  epoch/iter: 55/32799  total_loss: 69.2  loss_cls: 49.93  loss_triplet: 19.18  time: 0.3140  data_time: 0.0010  lr: 7.42e-04  max_mem: 11888M
+[10/23 11:08:53 fastreid.utils.events]:  eta: 0:12:27  epoch/iter: 55/32999  total_loss: 69.44  loss_cls: 49.9  loss_triplet: 19.41  time: 0.3140  data_time: 0.0012  lr: 7.42e-04  max_mem: 11888M
+[10/23 11:09:06 fastreid.utils.events]:  eta: 0:12:15  epoch/iter: 55/33039  total_loss: 69.71  loss_cls: 49.92  loss_triplet: 19.72  time: 0.3140  data_time: 0.0014  lr: 7.42e-04  max_mem: 11888M
+[10/23 11:09:56 fastreid.utils.events]:  eta: 0:11:25  epoch/iter: 56/33199  total_loss: 69.57  loss_cls: 49.91  loss_triplet: 19.75  time: 0.3140  data_time: 0.0015  lr: 5.06e-04  max_mem: 11888M
+[10/23 11:10:58 fastreid.utils.events]:  eta: 0:10:23  epoch/iter: 56/33399  total_loss: 69.82  loss_cls: 49.95  loss_triplet: 19.8  time: 0.3139  data_time: 0.0013  lr: 5.06e-04  max_mem: 11888M
+[10/23 11:12:00 fastreid.utils.events]:  eta: 0:09:21  epoch/iter: 56/33599  total_loss: 69.46  loss_cls: 49.93  loss_triplet: 19.49  time: 0.3139  data_time: 0.0009  lr: 5.06e-04  max_mem: 11888M
+[10/23 11:12:09 fastreid.utils.events]:  eta: 0:09:12  epoch/iter: 56/33629  total_loss: 69.48  loss_cls: 49.89  loss_triplet: 19.61  time: 0.3139  data_time: 0.0013  lr: 5.06e-04  max_mem: 11888M
+[10/23 11:13:02 fastreid.utils.events]:  eta: 0:08:18  epoch/iter: 57/33799  total_loss: 70.04  loss_cls: 49.94  loss_triplet: 20  time: 0.3139  data_time: 0.0016  lr: 3.20e-04  max_mem: 11888M
+[10/23 11:14:04 fastreid.utils.events]:  eta: 0:07:15  epoch/iter: 57/33999  total_loss: 69.6  loss_cls: 49.91  loss_triplet: 19.71  time: 0.3139  data_time: 0.0010  lr: 3.20e-04  max_mem: 11888M
+[10/23 11:15:07 fastreid.utils.events]:  eta: 0:06:13  epoch/iter: 57/34199  total_loss: 69.46  loss_cls: 49.94  loss_triplet: 19.55  time: 0.3139  data_time: 0.0009  lr: 3.20e-04  max_mem: 11888M
+[10/23 11:15:13 fastreid.utils.events]:  eta: 0:06:07  epoch/iter: 57/34219  total_loss: 69.25  loss_cls: 49.94  loss_triplet: 19.42  time: 0.3139  data_time: 0.0010  lr: 3.20e-04  max_mem: 11888M
+[10/23 11:16:09 fastreid.utils.events]:  eta: 0:05:11  epoch/iter: 58/34399  total_loss: 69.54  loss_cls: 50  loss_triplet: 19.51  time: 0.3138  data_time: 0.0006  lr: 1.85e-04  max_mem: 11888M
+[10/23 11:17:11 fastreid.utils.events]:  eta: 0:04:09  epoch/iter: 58/34599  total_loss: 69.41  loss_cls: 49.88  loss_triplet: 19.54  time: 0.3138  data_time: 0.0008  lr: 1.85e-04  max_mem: 11888M
+[10/23 11:18:14 fastreid.utils.events]:  eta: 0:03:07  epoch/iter: 58/34799  total_loss: 69.53  loss_cls: 49.91  loss_triplet: 19.61  time: 0.3138  data_time: 0.0011  lr: 1.85e-04  max_mem: 11888M
+[10/23 11:18:17 fastreid.utils.events]:  eta: 0:03:04  epoch/iter: 58/34809  total_loss: 69.49  loss_cls: 49.92  loss_triplet: 19.56  time: 0.3138  data_time: 0.0014  lr: 1.85e-04  max_mem: 11888M
+[10/23 11:19:16 fastreid.utils.events]:  eta: 0:02:04  epoch/iter: 59/34999  total_loss: 69.36  loss_cls: 49.98  loss_triplet: 19.47  time: 0.3138  data_time: 0.0013  lr: 1.04e-04  max_mem: 11888M
+[10/23 11:20:18 fastreid.utils.events]:  eta: 0:01:02  epoch/iter: 59/35199  total_loss: 69.45  loss_cls: 49.97  loss_triplet: 19.45  time: 0.3138  data_time: 0.0013  lr: 1.04e-04  max_mem: 11888M
+[10/23 11:21:20 fastreid.utils.events]:  eta: 0:00:00  epoch/iter: 59/35399  total_loss: 69.34  loss_cls: 49.95  loss_triplet: 19.53  time: 0.3138  data_time: 0.0016  lr: 1.04e-04  max_mem: 11888M
+[10/23 11:21:20 fastreid.engine.defaults]: Prepare testing set
+[10/23 11:21:21 fastreid.data.datasets.bases]: => Loaded VeRi in csv format: 
+| subset   | # ids   | # images   | # cameras   |
+|:---------|:--------|:-----------|:------------|
+| query    | 200     | 1678       | 19          |
+| gallery  | 200     | 11579      | 19          |
+[10/23 11:21:21 fastreid.evaluation.evaluator]: Start inference on 13257 images
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+/root/fast-reid/./fastreid/data/transforms/functional.py:46: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  img = torch.ByteTensor(torch.ByteStorage.from_buffer(pic.tobytes()))
+[10/23 11:21:27 fastreid.evaluation.evaluator]: Inference done 11/52. 0.3814 s / batch. ETA=0:00:17
+[10/23 11:21:46 fastreid.evaluation.evaluator]: Total inference time: 0:00:20.797438 (0.442499 s / batch per device, on 1 devices)
+[10/23 11:21:46 fastreid.evaluation.evaluator]: Total inference pure compute time: 0:00:18 (0.384916 s / batch per device, on 1 devices)
+[10/23 11:21:47 fastreid.engine.defaults]: Evaluation results for VeRi in csv format:
+[10/23 11:21:47 fastreid.evaluation.testing]: Evaluation results in csv format: 
+| Dataset   | Rank-1   | Rank-5   | Rank-10   | mAP   | mINP   | metric   |
+|:----------|:---------|:---------|:----------|:------|:-------|:---------|
+| VeRi      | 21.04    | 33.79    | 41.06     | 5.12  | 0.67   | 13.08    |
+[10/23 11:21:47 fastreid.utils.checkpoint]: Saving checkpoint to logs/veri/sbs_R50-ibn/model_final.pth
+[10/23 11:21:47 fastreid.utils.events]:  eta: 0:00:00  epoch/iter: 59/35399  total_loss: 69.34  loss_cls: 49.95  loss_triplet: 19.53  time: 0.3138  data_time: 0.0016  lr: 1.04e-04  max_mem: 11888M
+[10/23 11:21:47 fastreid.engine.hooks]: Overall training speed: 35398 iterations in 3:05:07 (0.3138 s / it)
+[10/23 11:21:47 fastreid.engine.hooks]: Total training time: 3:07:56 (0:02:49 on hooks)
+(base) root@autodl-container-e1fd4c8f28-6079387a:~/fast-reid# cat output_hammer.log | grep "| VeRi"
+| VeRi      | 20.50    | 33.43    | 41.66     | 4.94  | 0.66   | 12.72    |
+| VeRi      | 22.17    | 34.92    | 42.49     | 5.16  | 0.67   | 13.66    |
+| VeRi      | 21.63    | 34.92    | 41.95     | 5.17  | 0.67   | 13.40    |
+| VeRi      | 21.57    | 34.51    | 41.95     | 5.22  | 0.68   | 13.40    |
+| VeRi      | 21.10    | 34.33    | 41.78     | 5.21  | 0.67   | 13.15    |
+| VeRi      | 21.04    | 33.79    | 41.06     | 5.12  | 0.67   | 13.08    |
+(base) root@autodl-container-e1fd4c8f28-6079387a:~/fast-reid# rm -rf Ai_unzold/vim output_hammer.log 
+(base) root@autodl-container-e1fd4c8f28-6079387a:~/fast-reid# rm -rf Ai_unzold/vim output_hammer.log 
