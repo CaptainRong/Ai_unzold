@@ -1,112 +1,69 @@
-import os
-import random
-import numpy as np
+import streamlit as st
 import cv2
+import os
 
-from torch.utils.data import Dataset
-from utils import hwc_to_chw, read_img
+# 设置页面背景颜色和标题颜色
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #f0f5f9;  /* 柔和背景色 */
+    }
+    .title {
+        color: #00252E;  /* 修改标题颜色为#00252E */
+        font-size: 2em;  /* 可选：调整字体大小 */
+        text-align: center;  /* 可选：居中对齐 */
+    }
+    .button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
+# 页面标题
+st.markdown("<h1 class='title'>去雾增强车辆重识别系统</h1>", unsafe_allow_html=True)
 
-def augment(imgs=[], size=256, edge_decay=0., only_h_flip=False):
-    H, W, _ = imgs[0].shape
-    Hc, Wc = [size, size]
-    if (H < Hc) or (W < Wc):
-        imgs[0] = cv2.resize(imgs[0], (Hc, Wc))
-        imgs[1] = cv2.resize(imgs[1], (Hc, Wc))
-        H, W = Hc, Wc
-    # simple re-weight for the edge
-    if random.random() < Hc / H * edge_decay:
-        Hs = 0 if random.randint(0, 1) == 0 else H - Hc
-    else:
-        # print(H, Hc)
-        Hs = random.randint(0, H - Hc)
+# 创建左右布局
+col1, col2 = st.columns(2)
 
-    if random.random() < Wc / W * edge_decay:
-        Ws = 0 if random.randint(0, 1) == 0 else W - Wc
-    else:
-        Ws = random.randint(0, W - Wc)
+# 左侧: 查询图像上传
+with col1:
+    image_file = st.file_uploader("Please upload query image(.jpg/.jpeg/.png)", type=["jpg", "jpeg", "png"])
+    if image_file is not None:
+        st.image(image_file, caption="Query image", use_column_width=True)
 
-    for i in range(len(imgs)):
-        imgs[i] = imgs[i][Hs:(Hs + Hc), Ws:(Ws + Wc), :]
+# 右侧: 视频文件上传
+with col2:
+    video_file = st.file_uploader("Please upload video(.mp4/.avi)", type=["mp4", "avi"])
+    if video_file is not None:
+        video_path = video_file.name
+        with open(video_path, "wb") as f:
+            f.write(video_file.getbuffer())
+        st.video(video_path)
 
-    # horizontal flip
-    if random.randint(0, 1) == 1:
-        for i in range(len(imgs)):
-            imgs[i] = np.flip(imgs[i], axis=1)
+# 底部按钮
+if image_file and video_file:
+    if st.button("Start ReID"):
+        # 这里应该调用你的重识别模型并进行处理
+        # 简单演示：将结果输出到新视频中
+        cap = cv2.VideoCapture(video_path)
+        output_path = "output_video.mp4"
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        out = cv2.VideoWriter(output_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
 
-    if not only_h_flip:
-        # bad data augmentations for outdoor
-        rot_deg = random.randint(0, 3)
-        for i in range(len(imgs)):
-            imgs[i] = np.rot90(imgs[i], rot_deg, (0, 1))
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+            # 示例：在每一帧上画一个矩形框，模拟重识别结果
+            cv2.rectangle(frame, (50, 50), (200, 200), (0, 255, 0), 2)
+            out.write(frame)
 
-    return imgs
+        cap.release()
+        out.release()
 
-
-def align(imgs=[], size=256):
-    H, W, _ = imgs[0].shape
-    Hc, Wc = [size, size]
-    if (H < Hc) or (W < Wc):
-        imgs[0] = cv2.resize(imgs[0], (Hc, Wc))
-        imgs[1] = cv2.resize(imgs[1], (Hc, Wc))
-        H, W = Hc, Wc
-    Hs = (H - Hc) // 2
-    Ws = (W - Wc) // 2
-    for i in range(len(imgs)):
-        imgs[i] = imgs[i][Hs:(Hs + Hc), Ws:(Ws + Wc), :]
-
-    return imgs
-
-
-class PairLoader(Dataset):
-    def __init__(self, data_dir, sub_dir, mode, size=256, edge_decay=0, only_h_flip=False):
-        assert mode in ['train', 'valid', 'test']
-
-        self.mode = mode
-        self.size = size
-        self.edge_decay = edge_decay
-        self.only_h_flip = only_h_flip
-
-        self.root_dir = os.path.join(data_dir, sub_dir)
-        self.img_names = sorted(os.listdir(os.path.join(self.root_dir, 'GT')))
-        self.img_num = len(self.img_names)
-
-    def __len__(self):
-        return self.img_num
-
-    def __getitem__(self, idx):
-        cv2.setNumThreads(0)
-        cv2.ocl.setUseOpenCL(False)
-
-        # read image, and scale [0, 1] to [-1, 1]
-        img_name = self.img_names[idx]
-        source_img = read_img(os.path.join(self.root_dir, 'hazy', img_name)) * 2 - 1
-        target_img = read_img(os.path.join(self.root_dir, 'GT', img_name)) * 2 - 1
-
-        if self.mode == 'train':
-            [source_img, target_img] = augment([source_img, target_img], self.size, self.edge_decay, self.only_h_flip)
-            print(f"train:{img_name} read finished")
-        if self.mode == 'valid':
-            [source_img, target_img] = align([source_img, target_img], self.size)
-            print(f"test:{img_name} read finished")
-        return {'source': hwc_to_chw(source_img), 'target': hwc_to_chw(target_img), 'filename': img_name}
-
-
-class SingleLoader(Dataset):
-    def __init__(self, root_dir):
-        self.root_dir = root_dir
-        self.img_names = sorted(os.listdir(self.root_dir))
-        self.img_num = len(self.img_names)
-
-    def __len__(self):
-        return self.img_num
-
-    def __getitem__(self, idx):
-        cv2.setNumThreads(0)
-        cv2.ocl.setUseOpenCL(False)
-
-        # read image, and scale [0, 1] to [-1, 1]
-        img_name = self.img_names[idx]
-        img = read_img(os.path.join(self.root_dir, img_name)) * 2 - 1
-
-        return {'img': hwc_to_chw(img), 'filename': img_name}
+        # 展示输出视频
+        st.video(output_path)
+        os.remove(video_path)

@@ -2,11 +2,16 @@ import streamlit as st
 import cv2
 import os
 
-# 设置页面背景颜色
+# 设置页面背景颜色和标题颜色
 st.markdown("""
     <style>
     .stApp {
         background-color: #f0f5f9;  /* 柔和背景色 */
+    }
+    .title {
+        color: blue;  /* 修改标题颜色为蓝色 */
+        font-size: 2em;  /* 可选：调整字体大小 */
+        text-align: center;  /* 可选：居中对齐 */
     }
     .button {
         display: block;
@@ -18,7 +23,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # 页面标题
-st.title("去雾增强车辆重识别系统")
+st.markdown("<h1 class='title'>去雾增强车辆重识别系统</h1>", unsafe_allow_html=True)
 
 # 创建左右布局
 col1, col2 = st.columns(2)
