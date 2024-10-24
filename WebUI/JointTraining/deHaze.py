@@ -1,11 +1,22 @@
+import sys
+import os
+
+# Assuming the script is inside JointTraining, adjust the path to the project root
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
+sys.path.insert(0, project_root)
+
+# Now use the absolute import
+from DehazeFormer.models.dehazeformer import dehazeformer_b
+
 import torch
 import torch.nn.functional as F
 import numpy as np
 from collections import OrderedDict
-from PIL import Image
 from torchvision import transforms
 import cv2
-from DehazeFormer.models import dehazeformer_b  # Assuming your model definitions are here
+
+
+
 
 
 # 加载训练好的模型
@@ -54,7 +65,6 @@ def save_dehaze_image(image_path, model):
 
 def process_hazy(img, model):
     # 读取图片并预处理
-    img = cv2.imread(image_path)
     img[:, :, ::-1].astype('float32') / 255.0
     transform = transforms.Compose([
         transforms.ToTensor(),  # 转换为Tensor
@@ -75,16 +85,9 @@ def process_hazy(img, model):
 
 
 if __name__ == '__main__':
-    # 你的模型路径
-    model_name = 'dehazeformer-b'  # 例如: dehazeformer-s
-    model_path = '../DehazeFormer/saved_models/indoor/dehazeformer-b.pth'
-
-    # 加载模型
-    network = load_model(model_path, model_name)
-
     # 你要去雾的图片路径
-    image_path = './data/hazy2.jpg'
+    image_path = 'data/hazy2.jpg'
 
     # 处理单张图片
-    result_path = save_dehaze_image(image_path, network)
+    result_path = save_dehaze_image(image_path, model)
     print(f"去雾处理完成，结果保存为: {result_path}")

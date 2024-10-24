@@ -2,6 +2,15 @@ import streamlit as st
 import cv2
 import os
 
+from JointTraining.deHaze import process_hazy, load_model
+
+
+# 你的模型路径
+model_name = 'dehazeformer-b'  # 例如: dehazeformer-s
+model_path = '../DehazeFormer/saved_models/indoor/dehazeformer-b.pth'
+# 加载模型
+model = load_model(model_path, model_name)
+
 # 设置页面背景颜色和标题颜色
 st.markdown("""
     <style>
@@ -9,15 +18,23 @@ st.markdown("""
         background-color: #f0f5f9;  /* 柔和背景色 */
     }
     .title {
-        color: blue;  /* 修改标题颜色为蓝色 */
+        color: #224575;  /* 修改标题颜色为蓝色 */
         font-size: 2em;  /* 可选：调整字体大小 */
         text-align: center;  /* 可选：居中对齐 */
     }
-    .button {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
+    /* 按钮的自定义样式 */
+    .stButton>button {
+        background-color: #3498db;  /* 按钮背景色（蓝色） */
+        color: white;  /* 按钮文本颜色（白色） */
+        border: none;  /* 移除边框 */
+        padding: 10px 24px;  /* 调整内边距 */
+        font-size: 16px;  /* 按钮字体大小 */
+        border-radius: 10px;  /* 圆角边框 */
+        cursor: pointer;  /* 鼠标悬停时的手形图标 */
+    }
+    /* 鼠标悬停时按钮的颜色变化 */
+    .stButton>button:hover {
+        background-color: #2980b9;  /* 更深的蓝色 */
     }
     </style>
     """, unsafe_allow_html=True)
@@ -50,16 +67,20 @@ if image_file and video_file:
         # 简单演示：将结果输出到新视频中
         cap = cv2.VideoCapture(video_path)
         output_path = "output_video.mp4"
-        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        fourcc = cv2.VideoWriter_fourcc('M', 'P', '4', 'V')
         out = cv2.VideoWriter(output_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
-
+        i = 0
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
-            # 示例：在每一帧上画一个矩形框，模拟重识别结果
-            cv2.rectangle(frame, (50, 50), (200, 200), (0, 255, 0), 2)
-            out.write(frame)
+            if i == 10:
+                print("processing......")
+                processed_img = process_hazy(frame, model)
+                print("process finished")
+                i = 0
+                out.write(frame)
+            i += 1
 
         cap.release()
         out.release()
