@@ -4,7 +4,7 @@
 
 1. 上传了训练得到的模型（`dehaze/saved_models/outdoor/dehazeformer-b_trained.pth`）以及训练模型的部分图片测试结果（`dehaze/result/outdoor`），需要更多测试结果运行`python test.py --model=dehazeformer-b --save_dir=./results/ --dataset=outdoor --exp=outdoor`，其中model.pth需要放在results文件夹下，待去雾图片按照数据集格式放置. 目前从csv的指标(ssim和BCE)对比可以发现总体效果有较明显的提升（也有可能存在过拟合）
 2. 上传了GUI（`WebGUI/test.py`），运行请使用streamlit run path/to/code.
-
+3. hello
 ### TODO
 1. *实现Dehaze和重识别网络的联合训练，并修改loss，使分类/目标检测结果能够反馈给DehazeFormer（实现程度取决于时间够不够）
 2. 小球距离测量的代码测试
