@@ -7,7 +7,7 @@ from JointTraining.deHaze import process_hazy, load_model
 
 # 你的模型路径
 model_name = 'dehazeformer-b'  # 例如: dehazeformer-s
-model_path = '../DehazeFormer/saved_models/indoor/dehazeformer-b.pth'
+model_path = 'DehazeFormer/saved_models/indoor/dehazeformer-b.pth'
 # 加载模型
 model = load_model(model_path, model_name)
 
@@ -69,17 +69,17 @@ if image_file and video_file:
         output_path = "output_video.mp4"
         fourcc = cv2.VideoWriter_fourcc('M', 'P', '4', 'V')
         out = cv2.VideoWriter(output_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
-        i = 0
+        i = 30
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
-            if i == 10:
+            if i == 30:
                 print("processing......")
                 processed_img = process_hazy(frame, model)
                 print("process finished")
                 i = 0
-                out.write(frame)
+            out.write(processed_img)
             i += 1
 
         cap.release()
