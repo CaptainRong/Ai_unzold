@@ -1,0 +1,2 @@
+Total detected balls after NMS: 181
+Inference time: 9.16 seconds

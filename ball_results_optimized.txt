@@ -1,0 +1,2 @@
+Total detected balls: 402
+Inference time: 19.56 seconds

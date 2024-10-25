@@ -1,0 +1,4 @@
+Total detected balls: 72
+Total detected balls: 72
+Discrepancy: Detected 72 balls, expected 240.
+Inference time: 0.35 seconds
