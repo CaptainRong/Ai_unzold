@@ -1,46 +1,42 @@
 import streamlit as st
 import cv2
 import os
+import sys
+import numpy as np
+sys.path.append('/root/workspace/dehaze_picture/src')
+sys.path.append("/root/workspace/Dehaze_VeRi/onnx_model")
+import dehazeForVideo
+import inter
+import multiprocessing
+from PIL import Image
+import subprocess
 
-from JointTraining.deHaze import process_hazy, load_model
+script_path = '/root/workspace/WebUI/veri_start.sh'
 
-
-# 你的模型路径
-model_name = 'dehazeformer-b'  # 例如: dehazeformer-s
-model_path = 'DehazeFormer/saved_models/indoor/dehazeformer-b.pth'
-# 加载模型
-model = load_model(model_path, model_name)
-
-# 设置页面背景颜色和标题颜色
+# 设置页面背景颜色
 st.markdown("""
     <style>
     .stApp {
         background-color: #f0f5f9;  /* 柔和背景色 */
     }
-    .title {
-        color: #224575;  /* 修改标题颜色为蓝色 */
-        font-size: 2em;  /* 可选：调整字体大小 */
-        text-align: center;  /* 可选：居中对齐 */
-    }
-    /* 按钮的自定义样式 */
-    .stButton>button {
-        background-color: #3498db;  /* 按钮背景色（蓝色） */
-        color: white;  /* 按钮文本颜色（白色） */
-        border: none;  /* 移除边框 */
-        padding: 10px 24px;  /* 调整内边距 */
-        font-size: 16px;  /* 按钮字体大小 */
-        border-radius: 10px;  /* 圆角边框 */
-        cursor: pointer;  /* 鼠标悬停时的手形图标 */
-    }
-    /* 鼠标悬停时按钮的颜色变化 */
-    .stButton>button:hover {
-        background-color: #2980b9;  /* 更深的蓝色 */
+    .button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
     </style>
     """, unsafe_allow_html=True)
 
+# 创建一个保存图像的文件夹
+save_dir = "uploaded_images"
+save_path = None
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+
+
 # 页面标题
-st.markdown("<h1 class='title'>去雾增强车辆重识别系统</h1>", unsafe_allow_html=True)
+st.title("去雾重识别系统")
 
 # 创建左右布局
 col1, col2 = st.columns(2)
@@ -48,8 +44,20 @@ col1, col2 = st.columns(2)
 # 左侧: 查询图像上传
 with col1:
     image_file = st.file_uploader("Please upload query image(.jpg/.jpeg/.png)", type=["jpg", "jpeg", "png"])
-    if image_file is not None:
+    if image_file is not None: 
+        # 打开并读取图像
+        image = Image.open(image_file)
+        
+        # 指定文件名（你可以根据需要修改文件名）
+        file_name = "uploaded_image.jpg"  # 你可以在这里设置需要的文件名
+        
+        # 保存图像到新文件夹中
+        image.save(os.path.join(save_dir, file_name))
+        
+        # 显示成功消息
+        st.success(f"Image saved successfully at {save_dir}")
         st.image(image_file, caption="Query image", use_column_width=True)
+
 
 # 右侧: 视频文件上传
 with col2:
@@ -63,28 +71,18 @@ with col2:
 # 底部按钮
 if image_file and video_file:
     if st.button("Start ReID"):
-        # 这里应该调用你的重识别模型并进行处理
-        # 简单演示：将结果输出到新视频中
-        cap = cv2.VideoCapture(video_path)
-        output_path = "output_video.mp4"
-        fourcc = cv2.VideoWriter_fourcc('M', 'P', '4', 'V')
-        out = cv2.VideoWriter(output_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
-        i = 30
-        while cap.isOpened():
-            ret, frame = cap.read()
-            if not ret:
-                break
-            if i == 30:
-                print("processing......")
-                processed_img = process_hazy(frame, model)
-                print("process finished")
-                i = 0
-            out.write(processed_img)
-            i += 1
+      
+        # 去雾
 
-        cap.release()
-        out.release()
+        out_dehaze_list = dehazeForVideo.process_video_frame_HaMmer(video_path, "/root/workspace/dehaze_picture/out/output.mp4")
 
-        # 展示输出视频
-        st.video(output_path)
-        os.remove(video_path)
+        # 重识别
+
+        # 使用 subprocess.run 执行 shell 脚本
+        try:
+            result = subprocess.run(['bash', script_path], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            print("脚本输出：", result.stdout.decode())
+            st.video("/root/workspace/WebUI/out/veri_output.mp4")
+        except subprocess.CalledProcessError as e:
+            print("脚本执行失败：", e.stderr.decode())
+        
